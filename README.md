@@ -207,7 +207,7 @@ Tests include:
 Results are recorded in:
 
 output/performance.csv
-
+```
 📂 Project Structure
 citytransport-mst/
 ├── pom.xml                                   # 🧩 Maven build configuration
@@ -241,7 +241,8 @@ citytransport-mst/
 └── output/                                    # 📈 Output results & performance logs
     ├── results.json
     └── performance.csv
-
+```
+```
 📊 Example Output
 {
   "graphName": "medium_10_nodes",
@@ -256,7 +257,7 @@ citytransport-mst/
     "operations": 18
   }
 }
-
+```
 📚 References
 
 Cormen, T. H., Leiserson, C. E., Rivest, R. L., & Stein, C. (2009). Introduction to Algorithms (3rd ed.). MIT Press.
