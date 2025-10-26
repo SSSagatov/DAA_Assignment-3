@@ -98,7 +98,7 @@ O(E \log E)
 ---
 
 ## Project Structure
-
+```
 citytransport-mst/
 ├── pom.xml                                   # Maven build configuration file
 ├── src/
@@ -129,9 +129,7 @@ citytransport-mst/
 └── output/                                    # Output results & CSV performance summaries
     ├── results.json
     └── performance.csv
-
-
-text
+```
 
 ---
 
