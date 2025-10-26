@@ -1,235 +1,133 @@
-CityTransport MST Project README
-Project Overview
-CityTransport MST is a software project designed to optimize urban transport networks by computing Minimum Spanning Trees (MSTs) on weighted graphs, representing city transport points (vertices) and routes (edges). The goal is to find the minimal set of connections covering all points with the least total cost, essential for infrastructure planning.
+# CityTransport MST Project
 
-Theoretical Background
-Graphs in Transportation Networks
-A graph 
-G
-=
-(
-V
-,
-E
-)
-G=(V,E) consists of a set of vertices 
-V
-V (nodes/stations) and edges 
-E
-E (connections/routes). Each edge has a weight representing cost, distance, or travel time. This abstraction allows analyzing the connectivity and optimization of transport systems.
+## Project Overview
 
-Minimum Spanning Tree (MST)
-An MST is a subset of edges 
-E
-′
-⊆
-E
-E 
-′
- ⊆E that connects all vertices 
-V
-V without cycles and with minimum possible total edge weight:
+CityTransport MST is a software project designed to optimize urban transport networks by computing Minimum Spanning Trees (MSTs) on weighted graphs, representing city transport points (vertices) and routes (edges). The project aims to find the minimal set of connections covering all points with the least total cost — crucial for infrastructure planning and resource optimization.
 
-MST
-=
-arg
-⁡
-min
-⁡
-E
-′
-∑
-e
-∈
-E
-′
-w
-(
-e
-)
-MST=arg 
-E 
-′
- 
-min
-  
-e∈E 
-′
- 
-∑
- w(e)
-subject to 
-E
-′
-E 
-′
-  connecting all vertices and forming a tree.
+---
 
-Applications include minimizing road construction costs and resource allocation.
+## Theoretical Background
 
-Algorithms Implemented
-Prim's Algorithm
-Starts from a selected vertex 
-v
-0
-v 
-0
- .
+### Graphs in Transportation Networks
 
-Repeatedly adds the smallest weight edge that connects a vertex in the growing MST to a vertex outside it.
+A **graph** \(G = (V, E)\) consists of vertices \(V\) (stations or stops) and edges \(E\) (routes between them), where each edge has a weight representing cost, distance, or travel time. This abstraction models transport connectivity.
 
-Uses a priority queue for efficient edge selection.
+---
 
-Time complexity: 
-O
-(
-E
-log
-⁡
-V
-)
-O(ElogV).
+### Minimum Spanning Tree (MST)
 
-Pseudo-code:
+A Minimum Spanning Tree is a subset of edges \(E' \subseteq E\) connecting all vertices \(V\) without any cycles, minimizing the total edge weight:
 
-Initialize MST with vertex 
-v
-0
-v 
-0
- .
+\[
+\text{MST} = \arg\min_{E'~:~\text{tree}} \sum_{e \in E'} w(e)
+\]
 
-While MST does not include all vertices:
+Applications: reducing infrastructure costs while maintaining full connectivity.
 
-Select edge with minimum weight connecting MST to 
-V
-∖
-M
-S
-T
-V∖MST.
+---
 
-Add that edge and the vertex to MST.
+### Algorithms Implemented
 
-Kruskal's Algorithm
-Sorts all edges by increasing weight.
+#### Prim's Algorithm
 
-Adds edges one-by-one if they do not form a cycle.
+- Constructs MST by growing from a starting vertex.
+- At each step, adds the minimum weight edge extending the MST.
+- Uses a priority queue for efficiency.
+- **Time complexity:** \(O(E \log V)\)
 
-Uses Union-Find (Disjoint Set) for cycle detection.
+**Outline:**
+1. Start at arbitrary vertex.
+2. While MST not spanning all vertices:
+   - Add minimum weight edge connecting MST to outside vertex.
 
-Time complexity: 
-O
-(
-E
-log
-⁡
-E
-)
-O(ElogE).
+#### Kruskal's Algorithm
 
-Pseudo-code:
+- Sorts all edges by weight.
+- Adds edges in order if they do not create cycles.
+- Uses Union-Find data structure for cycle detection.
+- **Time complexity:** \(O(E \log E)\)
 
-Sort edges in ascending order.
+**Outline:**
+1. Sort edges.
+2. Iterate edges, adding to MST if no cycle formed.
 
-Initialize MST as empty.
+---
 
-For each edge in sorted order:
+## How to Run
 
-If it connects two different components (no cycle), add it to MST.
+### Build and Run Program
 
-Stop when MST connects all vertices.
-
-Running the Project
-Build and Run Application
-bash
 mvn clean compile
 mvn exec:java -Dexec.mainClass=com.citytransport.Main
-Inputs are read from JSON files in input/.
 
-Results and MST outputs are written to output/.
-
-Running Tests
-bash
-mvn test
-Executes two main test suites:
-
-JSON serialization/deserialization correctness.
-
-Algorithm correctness and performance on different sized graphs.
-
-Detailed test results with operational counts and execution times are saved to output/mst_results.csv.
-
-Mathematical Formulas Used
-MST weight minimization:
-
-min
-⁡
-∑
-(
-u
-,
-v
-)
-∈
-T
-w
-(
-u
-,
-v
-)
-min 
-(u,v)∈T
-∑
- w(u,v)
-Complexity of Prim’s:
-
-O
-(
-E
-log
-⁡
-V
-)
-O(ElogV)
-Complexity of Kruskal’s:
-
-O
-(
-E
-log
-⁡
-E
-)
-O(ElogE)
-Project Architecture
 text
+
+- Input JSON files reside in the `input/` folder.
+- Output files including MST results are saved in the `output/` folder.
+
+### Run Test Suites
+
+mvn test
+
+text
+
+- Tests verify:
+  - JSON serialization/deserialization.
+  - Algorithm correctness and performance for various graph sizes.
+- Performance and operation counts are recorded in `output/mst_results.csv`.
+
+---
+
+## Key Formulas
+
+- MST weight minimization:  
+\[
+\min \sum_{(u,v) \in T} w(u,v)
+\]
+
+- Complexity of Prim's Algorithm:  
+\[
+O(E \log V)
+\]
+
+- Complexity of Kruskal's Algorithm:  
+\[
+O(E \log E)
+\]
+
+---
+
+## Project Structure
+
 citytransport-mst/
-├── pom.xml                      # Maven config
+├── pom.xml # Maven build config
 ├── src/
-│   ├── main/java/com/citytransport/
-│   │   ├── Main.java            # Program entry
-│   │   ├── algorithms/          # PrimAlgorithm, KruskalAlgorithm
-│   │   ├── graph/               # Graph, Edge
-│   │   ├── input/               # GraphInput, EdgeInput (JSON models)
-│   │   ├── model/               # MSTResult
-│   │   ├── output/              # JsonWriter
-│   │   └── utils/               # JsonReader
-│   └── test/java/com/citytransport/tests/
-│       ├── JsonSerializationTest.java
-│       └── MSTAlgorithmsTest.java
-├── input/                      # Input JSON files
-└── output/                     # Output JSON & mst_results.csv
-References
-Cormen, T. H., Leiserson, C. E., Rivest, R. L., & Stein, C. (2009). Introduction to Algorithms (3rd ed.). MIT Press.
+│ ├── main/java/com/citytransport/
+│ │ ├── Main.java # Entry point
+│ │ ├── algorithms/ # PrimAlgorithm, KruskalAlgorithm
+│ │ ├── graph/ # Graph, Edge models
+│ │ ├── input/ # GraphInput, EdgeInput (JSON models)
+│ │ ├── model/ # MSTResult model
+│ │ ├── output/ # JsonWriter
+│ │ └── utils/ # JsonReader
+│ └── test/java/com/citytransport/tests/
+│ ├── JsonSerializationTest.java
+│ └── MSTAlgorithmsTest.java
+├── input/ # Input JSON files
+└── output/ # Output JSON and CSV test results
 
-Prim, R. C. (1957). Shortest connection networks and some generalizations. Bell System Technical Journal, 36(6):1389–1401.
+text
 
-Kruskal, J. B. (1956). On the shortest spanning subtree of a graph and the traveling salesman problem. Proceedings of the American Mathematical Society, 7(1), 48–50.
+---
 
-GeeksforGeeks. (2023). Prim's Minimum Spanning Tree (MST). Retrieved from https://www.geeksforgeeks.org/prims-minimum-spanning-tree-mst-greedy-algo-5/
+## References
 
-GeeksforGeeks. (2023). Kruskal's Algorithm in Java. Retrieved from https://www.geeksforgeeks.org/java/kruskals-algorithm-in-java/
+- Cormen, T. H., Leiserson, C. E., Rivest, R. L., & Stein, C. (2009). *Introduction to Algorithms* (3rd ed.). MIT Press.
+- Prim, R. C. (1957). Shortest connection networks and some generalizations. *Bell System Technical Journal*, 36(6), 1389–1401.
+- Kruskal, J. B. (1956). On the shortest spanning subtree of a graph and the traveling salesman problem. *Proceedings of the American Mathematical Society*, 7(1), 48–50.
+- GeeksforGeeks: [Prim's MST](https://www.geeksforgeeks.org/prims-minimum-spanning-tree-mst-greedy-algo-5/), [Kruskal's Algorithm](https://www.geeksforgeeks.org/java/kruskals-algorithm-in-java/)
+- Baeldung: [Prim's Algorithm in Java](https://www.baeldung.com/java-prim-algorithm)
 
-Baeldung. (2024). Prim's Algorithm with a Java Implementation. Retrieved from https://www.baeldung.com/java-prim-algorithm
+---
+
+This README provides a comprehensive understanding of the project’s algorithms, usage, tests, formulas, and references to ensure clarity and ease of maintenance.
