@@ -100,21 +100,28 @@ O(E \log E)
 ## Project Structure
 
 citytransport-mst/
-├── pom.xml # Maven build config
+├── pom.xml                        # Maven build configuration
 ├── src/
-│ ├── main/java/com/citytransport/
-│ │ ├── Main.java # Entry point
-│ │ ├── algorithms/ # PrimAlgorithm, KruskalAlgorithm
-│ │ ├── graph/ # Graph, Edge models
-│ │ ├── input/ # GraphInput, EdgeInput (JSON models)
-│ │ ├── model/ # MSTResult model
-│ │ ├── output/ # JsonWriter
-│ │ └── utils/ # JsonReader
-│ └── test/java/com/citytransport/tests/
-│ ├── JsonSerializationTest.java
-│ └── MSTAlgorithmsTest.java
-├── input/ # Input JSON files
-└── output/ # Output JSON and CSV test results
+│   ├── main/
+│   │   └── java/
+│   │       └── com/
+│   │           └── citytransport/
+│   │               ├── Main.java               # Entry point of application
+│   │               ├── algorithms/             # PrimAlgorithm, KruskalAlgorithm implementations
+│   │               ├── graph/                  # Graph and Edge data models
+│   │               ├── input/                  # JSON input models: GraphInput, EdgeInput
+│   │               ├── model/                  # MSTResult model class
+│   │               ├── output/                 # JSON output writer: JsonWriter
+│   │               └── utils/                  # JSON reader utilities: JsonReader
+│   └── test/
+│       └── java/
+│           └── com/
+│               └── citytransport/
+│                   └── tests/
+│                       ├── JsonSerializationTest.java  # Tests for JSON serialization/deserialization
+│                       └── MSTAlgorithmsTest.java      # MST algorithm test and CSV logging
+├── input/                          # Folder for input JSON files
+└── output/                         # Folder for output JSON files and MST test CSV results
 
 text
 
