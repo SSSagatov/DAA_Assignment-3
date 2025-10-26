@@ -100,28 +100,36 @@ O(E \log E)
 ## Project Structure
 
 citytransport-mst/
-├── pom.xml                        # Maven build configuration
+├── pom.xml                                   # Maven build configuration file
 ├── src/
 │   ├── main/
 │   │   └── java/
 │   │       └── com/
 │   │           └── citytransport/
-│   │               ├── Main.java               # Entry point of application
-│   │               ├── algorithms/             # PrimAlgorithm, KruskalAlgorithm implementations
-│   │               ├── graph/                  # Graph and Edge data models
-│   │               ├── input/                  # JSON input models: GraphInput, EdgeInput
-│   │               ├── model/                  # MSTResult model class
-│   │               ├── output/                 # JSON output writer: JsonWriter
-│   │               └── utils/                  # JSON reader utilities: JsonReader
+│   │               ├── Main.java             # Application entry point
+│   │               ├── algorithms/           # PrimAlgorithm & KruskalAlgorithm implementations
+│   │               ├── graph/                # Graph and Edge domain models
+│   │               ├── input/                # JSON models: GraphInput, EdgeInput
+│   │               ├── model/                # Data model: MSTResult
+│   │               ├── output/               # JSON writer: JsonWriter
+│   │               └── utils/                # JSON reader: JsonReader
 │   └── test/
 │       └── java/
 │           └── com/
 │               └── citytransport/
 │                   └── tests/
-│                       ├── JsonSerializationTest.java  # Tests for JSON serialization/deserialization
-│                       └── MSTAlgorithmsTest.java      # MST algorithm test and CSV logging
-├── input/                          # Folder for input JSON files
-└── output/                         # Folder for output JSON files and MST test CSV results
+│                       ├── JsonSerializationTest.java  # Tests JSON serialization/deserialization
+│                       └── MSTAlgorithmsTest.java      # Tests MST algorithms & logs CSV results
+│
+├── input/                                     # Input JSON datasets (small, medium, large)
+│   ├── graph_small.json
+│   ├── graph_medium.json
+│   └── graph_large.json
+│
+└── output/                                    # Output results & CSV performance summaries
+    ├── results.json
+    └── performance.csv
+
 
 text
 
