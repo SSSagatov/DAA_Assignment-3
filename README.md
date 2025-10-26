@@ -143,4 +143,3 @@ citytransport-mst/
 
 ---
 
-This README provides a comprehensive understanding of the project’s algorithms, usage, tests, formulas, and references to ensure clarity and ease of maintenance.
