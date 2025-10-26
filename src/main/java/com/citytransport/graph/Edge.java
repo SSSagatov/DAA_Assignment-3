@@ -22,6 +22,6 @@ public class Edge implements Comparable<Edge> {
 
     @Override
     public String toString() {
-        return String.format("Edge(%d - %d, weight=%d)", source, dest, weight);
+        return String.format("Edge(%d->%d, w=%d)", source, dest, weight);
     }
 }

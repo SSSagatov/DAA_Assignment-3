@@ -1,25 +1,19 @@
 package com.citytransport.utils;
 
-import com.citytransport.graph.Graph;
+import com.citytransport.input.GraphInput;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
-import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 public class JsonReader {
-    public static Graph readGraphFromFile(String path) throws IOException {
+    public static List<GraphInput> readGraphsFromFile(String path) throws Exception {
         ObjectMapper mapper = new ObjectMapper();
         JsonNode root = mapper.readTree(new File(path));
-        int vertices = root.get("vertices").asInt();
-        Graph graph = new Graph(vertices);
-
-        for (JsonNode edgeNode : root.withArray("edges")) {
-            int src = edgeNode.get("source").asInt();
-            int dest = edgeNode.get("destination").asInt();
-            int weight = edgeNode.get("weight").asInt();
-            graph.addEdge(src, dest, weight);
-        }
-        return graph;
+        JsonNode graphsNode = root.get("graphs");
+        GraphInput[] graphArray = mapper.treeToValue(graphsNode, GraphInput[].class);
+        return Arrays.asList(graphArray);
     }
 }

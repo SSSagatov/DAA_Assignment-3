@@ -1,7 +1,6 @@
 package com.citytransport.model;
 
 import com.citytransport.graph.Edge;
-
 import java.util.List;
 
 public class MSTResult {
